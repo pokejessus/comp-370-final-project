@@ -23,11 +23,15 @@ RANDOM_SEED = 42
 
 # We picked these trivial words, otherwise picking sentences above a threshold would exclude too many relevent sentences
 TRIVIAL_EXACT = {
-    "uh", "uh oh", "oh", "ah", "aha", "hmm", "hm", "huh", "um", "er",
-    "yeah", "yep", "yup", "nope", "no", "yes", "hey", "hi", "bye",
-    "goodbye", "what", "why", "who", "where", "when", "wow", "oops",
-    "phew", "ugh", "tsk", "shh", "sh", "ok", "okay", "right", "sure",
-    "excellent", "d'oh", "ha", "ha ha", "ha ha ha", "aw", "gee",
+    "uh", "um", "er", "hmm", "huh", "ah", "oh", "ooh", "ow", "ugh", 
+    "aw", "eh", "whoa", "wow", "yay", "boo", "sigh", "gasp", "groan", 
+    "cough", "yes", "yeah", "yep", "yup", "no", "nope", "nah", "ok", 
+    "okay", "sure", "right", "fine", "alright", "all right", "true", 
+    "maybe", "please", "thanks", "thank you", "sorry", "excuse me", "pardon",
+    "hi", "hey", "hello", "bye", "goodbye", "see ya", "d'oh", "excellent",
+    "release the hounds", "smithers", "hi-diddly-ho", "okily-dokily", 
+    "uh oh", "oh no", "oh boy", "my god", "good lord", "what", "why", 
+    "how", "who", "where", "when", "really"
 }
 
 # Not all columns are relevent, so decided to keep these, more details in report. 
@@ -73,6 +77,7 @@ def is_non_trivial(cleaned_text: str, min_words: int = MIN_WORDS) -> bool:
     if len(words) < min_words:
         return False
 
+    # To remove words like la la la, blah blah blah, proud of that :D
     if len(words) <= 4 and (len(set(words)) / len(words)) <= 0.5:
         return False
 
@@ -103,8 +108,8 @@ def main() -> None:
         .agg(total_speaking=("id", "count"), non_trivial_lines=("non_trivial", "sum"))
         .reset_index()
     )
-    print("=== Speaking vs. Non-Trivial Lines ===")
-    print(summary.to_string(index=False))
+    print("=== Speaking vs. Non-Trivial Lines ===") 
+    print(summary.to_string(index=False)) # printing the number of non-trivial lines and total speaking
 
     filtered = sub[sub["non_trivial"]].copy()
 
