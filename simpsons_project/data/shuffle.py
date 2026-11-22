@@ -1,5 +1,8 @@
 from pathlib import Path
 import pandas as pd
+"""
+This is to shuffle the dataset so one annotator does not annotate the same character over and over again
+"""
 
 in_path = Path("simpsons_project/data/processed/annotation_dataset.csv")
 out_path = Path("simpsons_project/data/processed/annotation_dataset_shuffled.csv")

@@ -1,4 +1,7 @@
 import pandas as pd
+"""
+This is to calculate how many episodes per character and the mean words per line, for data/analys8is
+"""
 
 df = pd.read_csv("simpsons_project/data/processed/annotation_dataset.csv")
 

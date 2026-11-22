@@ -1,6 +1,9 @@
 import re
 from pathlib import Path
 import pandas as pd
+"""
+This is to filter/clean out the dataset!
+"""
 
 # Configuration
 INPUT_CSV = Path("simpsons_project/data/raw/csv/script_lines.csv")
@@ -74,7 +77,7 @@ def is_non_trivial(cleaned_text: str, min_words: int = MIN_WORDS) -> bool:
         return False
 
     words = [w for w in norm.split(" ") if w]
-    if len(words) < min_words:
+    if len(words) <= min_words:
         return False
 
     # To remove words like la la la, blah blah blah, proud of that :D
